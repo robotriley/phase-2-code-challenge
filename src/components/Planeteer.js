@@ -1,23 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 
-function Planeteer() {
+function Planeteer({ planeteer }) {
+  const [toggle, setToggle] = useState(true)
+
+  const { name, fromUsa, bio, quote, pictureUrl, twitter } = planeteer
+
+  const checkUsa = () => {
+    return (fromUsa ? 'USA-based' : 'Working Overseas')
+  }
+
+  const handleClick = () => {
+    const toggleBio = () => {
+      setToggle((toggle) => !toggle)
+      alert(quote)
+  }
+  toggleBio()
+  }
+
   return (
     <li className="cards__item">
       <div className="card">
         <img
-          src={"RENDER IMAGE"}
-          alt={"RENDER PERSON NAME"}
+          src={ pictureUrl }
+          alt={ name }
           className="card__image"
+          onClick={ handleClick }
         />
         <div className="card__content">
-          <div className="card__title">{"RENDER NAME"}</div>
-          <p className="card__text">{"CONDITIONALLY RENDER BIO OR QUOTE"}</p>
+          <div className="card__title">{ name }</div>
+          <p className="card__text">{ bio }</p>
           <div className="card__detail">
-            <p>{"RENDER TWITTER HANDLE"}</p>
+            <p>{ twitter }</p>
             <p>
-              {
-                "CONDITIONALLY RENDER WHETHER THE PERSON IS USA-BASED OR WORKING OVERSEAS"
-              }
+            { checkUsa(fromUsa) }  
             </p>
           </div>
         </div>
